@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: # дозволяє запуск вручну
+  workflow_dispatch: # дозволяє запуск вручну з GitHub UI
 
 jobs:
   build:
