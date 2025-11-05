@@ -27,13 +27,15 @@ jobs:
         uses: android-actions/setup-android@v2
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./FarmerFriendApp/gradlew
+        working-directory: ./FarmerFriendApp
+        run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: ./FarmerFriendApp/gradlew assembleDebug
+        working-directory: ./FarmerFriendApp
+        run: ./gradlew assembleDebug
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: AgroAI-debug-apk
-          path: FarmerFriendApp/app/build/outputs/apk/debug/app-debug.apk
+          path: ./FarmerFriendApp/app/build/outputs/apk/debug/app-debug.apk
