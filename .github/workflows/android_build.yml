@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: # дозволяє запуск вручну з GitHub UI
+  workflow_dispatch: # дозволяє запуск вручну
 
 jobs:
   build:
@@ -17,25 +17,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 11
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
 
       - name: Grant execute permission for gradlew
-        working-directory: ./FarmerFriendApp
-        run: chmod +x gradlew
+        run: chmod +x ./FarmerFriendApp/gradlew
 
       - name: Build Debug APK
-        working-directory: ./FarmerFriendApp
-        run: ./gradlew assembleDebug
+        run: ./FarmerFriendApp/gradlew assembleDebug
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: AgroAI-debug-apk
-          path: ./FarmerFriendApp/app/build/outputs/apk/debug/app-debug.apk
+          path: FarmerFriendApp/app/build/outputs/apk/debug/app-debug.apk
